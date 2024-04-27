@@ -8,7 +8,7 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-const openai = new OpenAI({apiKey:'sk-proj-qhoGfMjRiBZWeXaIg21VT3BlbkFJcLCxVf9vx7WLFjbUzAdv'});
+const openai = new OpenAI({apiKey:});
 
 console.log(openai);
 
