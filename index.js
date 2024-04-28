@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 const path = require('path');
+
 const NODE_ENV = process.env.NODE_ENV || 'development';
 require('dotenv').config({
     path: `.env.${NODE_ENV}`
@@ -12,7 +13,8 @@ require('dotenv').config({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname + '/public')));
 
-const openai = new OpenAI({apiKey:'process.env.API_KEY_SECRET'});
+
+const openai = new OpenAI({apiKey:`${process.env.API_KEY}`});
 
 console.log(openai);
 
@@ -36,7 +38,6 @@ app.post('/enviar-mensaje', async (req, res) => {
         res.status(500).send('Ocurrió un error al procesar su solicitud.');
     }
 });
-
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
