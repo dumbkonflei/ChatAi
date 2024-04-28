@@ -1,19 +1,20 @@
 const express = require('express');
 const OpenAI = require('openai');
 const bodyParser = require('body-parser');
-const axios = require('axios');
 const app = express();
 const port = 3000;
+const path = require('path');
+const NODE_ENV = process.env.NODE_ENV || 'development';
+require('dotenv').config({
+    path: `.env.${NODE_ENV}`
+});
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname + '/public')));
 
-const openai = new OpenAI({apiKey:});
+const openai = new OpenAI({apiKey:'process.env.API_KEY_SECRET'});
 
 console.log(openai);
-
-app.get('/', async (req, res) => {
-    res.sendFile(process.cwd()+ '/index.html')})
 
 app.post('/enviar-mensaje', async (req, res) => {
     try {
@@ -38,4 +39,7 @@ app.post('/enviar-mensaje', async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
-}); data
+});
+
+
+

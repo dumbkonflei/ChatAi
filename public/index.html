@@ -4,79 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ChatAI</title>
+<link rel="stylesheet" href="img/css/styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
       href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
       rel="stylesheet"
     />
-<style>
-    *{
-        font-family: "Pixelify Sans", sans-serif;
-    }
-    *::before
-    *::after{
-
-  box-sizing: border-box;
-}
-body{
-    display: grid;
-    margin: 0;
-    place-content: center;
-    background-color:black;
-    height: 100vh;
-    padding: 36ox;
-    grid-template-rows: 1fr;
-
-}
-.input{
-    border-radius: 10px;
-    flex: 1;
-    margin: 4px;
-    padding: 0 8px;
-}
-.box{
-    border: 1px solid white;
-    overflow: hidden;
-    width: 350px;
-    height: 100%;
-    position: relative;
-}
-.box-box{
-    bottom: 0;
-    display: flex;
-    height: 48px;
-    left: 0;
-    padding: 4px;
-    position: absolute;
-    right: 0;
-}
-.buttom{
-    border-radius: 10px;
-    position: relative;
-}
-.texto-cliente{
-    left: 280px;
-    position: relative;
-    margin-top: 10px;
-}
-.texto-ia{
-    position: relative;
-    margin-left: 20px;
-}
-</style>
+<audio id="audio" src="http://music.mp3"></audio>
 </head>
 <body>
 <div id="chat-container" class="container">
-    <div id="chat-box" class="box">
+    <div class="logo-container">
+        <img src="img/css/userlogo.png" alt="userlogo" class="logo">
+        <h1>Bot Asistente</h1> </div> 
+    <div id="chat-box" class="box"></div>
         <div class="box-box">
     <input type="text" id="chat-input" placeholder="Escribe tu mensaje aquí..." class="input">
     <button id="send-button" class="buttom">Enviar</button>
 </div>
-</div>
+
 </div>
 
 <script>
+    
+const audio = new Audio("js/Conchetumare.wav");
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    audio.play();
+  });
+});
 document.getElementById('send-button').addEventListener('click', async () => {
     const inputElement = document.getElementById('chat-input');
     const chatBox = document.getElementById('chat-box');
@@ -84,7 +42,7 @@ document.getElementById('send-button').addEventListener('click', async () => {
     inputElement.value = ''; // Limpiar el input
 
     // Mostrar el mensaje enviado en el chat
-    chatBox.innerHTML += `<div class="texto-cliente"> Yo: <br> ${message}</div>`;
+    chatBox.innerHTML += `<div class="texto-cliente"> Yo:<br>${message}</div>`;
 
     try {
         const response = await fetch('/enviar-mensaje', {
@@ -97,8 +55,7 @@ document.getElementById('send-button').addEventListener('click', async () => {
 
         if (response.ok) {
             const data = await response.json();
-            chatBox.innerHTML += `<div class= "texto-ia">AssistantsAI: <br> ${data}</div>`;
-            console.log(data)
+            chatBox.innerHTML += `<div class= "texto-ia">Bot Asistente: <br> ${data}</div>`;
         } else {
             console.error('Error en la respuesta del servidor');
         }
