@@ -40,7 +40,6 @@ app.post('/enviar-mensaje', async (req, res) => {
     }
 });
 
-console.log(`${process.env.API_KEY}`)
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
