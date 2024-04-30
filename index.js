@@ -5,7 +5,8 @@ const app = express();
 const port = 3000;
 const path = require('path');
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'key';
+
 require('dotenv').config({
     path: `.env.${NODE_ENV}`
 });
@@ -38,9 +39,8 @@ app.post('/enviar-mensaje', async (req, res) => {
         res.status(500).send('Ocurrió un error al procesar su solicitud.');
     }
 });
+
+console.log(`${process.env.API_KEY}`)
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
-
-
-
